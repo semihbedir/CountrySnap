@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Lightbulb, Send, MapPin, ArrowRight, Trophy, AlertCircle, Globe, Heart, SkipForward, Download, Users, UserPlus, X, LogOut, ListOrdered } from 'lucide-react';
 import Map from './components/Map';
 import { generateCountryHint } from './services/geminiService';
-import { GeoJSONCollection, GeoJSONFeature, GameStatus, CountryDetails, Player, LeaderboardEntry } from './types';
+import { CountryCollection, CountryFeature, GameStatus, CountryDetails, Player, LeaderboardEntry } from './types';
 
 const PLAYER_COLORS = [
   "text-blue-400", "text-green-400", "text-purple-400", "text-pink-400", "text-yellow-400", "text-cyan-400"
@@ -13,8 +13,8 @@ function App() {
   const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   // Data & Game State
-  const [geoData, setGeoData] = useState<GeoJSONCollection | null>(null);
-  const [targetCountry, setTargetCountry] = useState<GeoJSONFeature | null>(null);
+  const [geoData, setGeoData] = useState<CountryCollection | null>(null);
+  const [targetCountry, setTargetCountry] = useState<CountryFeature | null>(null);
   const [countryDetails, setCountryDetails] = useState<CountryDetails | null>(null);
   const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.LOADING);
   
@@ -67,7 +67,7 @@ function App() {
     // GeoJSON
     fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson')
       .then(res => res.json())
-      .then((data: GeoJSONCollection) => {
+      .then((data: CountryCollection) => {
         const filteredFeatures = data.features.filter(f => 
           f.properties.name !== "Antarctica" && 
           f.geometry.coordinates.length > 0

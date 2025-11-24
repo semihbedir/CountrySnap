@@ -1,13 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
 
-// Fix for TS2580: Cannot find name 'process'
-declare const process: any;
-
 let ai: GoogleGenAI | null = null;
 
 export const generateCountryHint = async (countryName: string, existingHints: string[]): Promise<string> => {
   try {
-    // Access process.env.API_KEY directly so Vite can perform string replacement
+    // Access process.env.API_KEY directly. Vite will replace this string during build.
     const apiKey = process.env.API_KEY;
 
     if (!apiKey) {
@@ -44,7 +41,9 @@ export const generateCountryHint = async (countryName: string, existingHints: st
       contents: prompt,
     });
 
-    const text = response.text;
+    // Handle potential undefined text response
+    const text = response.text || "";
+    
     if (!text) {
       return "Focus on the shape and location!";
     }

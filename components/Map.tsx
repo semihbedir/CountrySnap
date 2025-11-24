@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { GeoJSONCollection, GeoJSONFeature, GameStatus } from '../types';
+import { CountryCollection, CountryFeature, GameStatus } from '../types';
 
 interface MapProps {
-  data: GeoJSONCollection | null;
-  targetFeature: GeoJSONFeature | null;
+  data: CountryCollection | null;
+  targetFeature: CountryFeature | null;
   gameStatus: GameStatus;
   width: number;
   height: number;

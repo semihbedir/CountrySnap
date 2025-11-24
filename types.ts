@@ -1,4 +1,4 @@
-export interface GeoJSONFeature {
+export interface CountryFeature {
   type: "Feature";
   id?: string; // GeoJSON standard often puts id at the root
   properties: {
@@ -12,9 +12,9 @@ export interface GeoJSONFeature {
   };
 }
 
-export interface GeoJSONCollection {
+export interface CountryCollection {
   type: "FeatureCollection";
-  features: GeoJSONFeature[];
+  features: CountryFeature[];
 }
 
 export enum GameStatus {
