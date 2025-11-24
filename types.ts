@@ -1,5 +1,6 @@
 export interface GeoJSONFeature {
   type: "Feature";
+  id?: string; // GeoJSON standard often puts id at the root
   properties: {
     name: string;
     id?: string;

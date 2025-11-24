@@ -1,9 +1,25 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Fix for TS2580: Cannot find name 'process'
+declare const process: any;
+
+let ai: GoogleGenAI | null = null;
 
 export const generateCountryHint = async (countryName: string, existingHints: string[]): Promise<string> => {
   try {
+    // Access process.env.API_KEY directly so Vite can perform string replacement
+    const apiKey = process.env.API_KEY;
+
+    if (!apiKey) {
+      console.warn("API_KEY is missing in environment variables.");
+      return "Hints are currently unavailable (Missing API Key). Focus on the shape!";
+    }
+
+    // Lazy initialization
+    if (!ai) {
+      ai = new GoogleGenAI({ apiKey });
+    }
+
     const prompt = `
       You are a game host for a "Guess the Country" game.
       The user is looking at an outline of the country: "${countryName}".
@@ -28,7 +44,11 @@ export const generateCountryHint = async (countryName: string, existingHints: st
       contents: prompt,
     });
 
-    return response.text.trim();
+    const text = response.text;
+    if (!text) {
+      return "Focus on the shape and location!";
+    }
+    return text.trim();
   } catch (error) {
     console.error("Error generating hint:", error);
     return "I'm having trouble retrieving a hint right now. Focus on the shape!";
