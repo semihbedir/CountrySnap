@@ -1,0 +1,5 @@
+{
+  "name": "CountrySnap",
+  "description": "A geography guessing game where the map zooms into a country and Gemini AI provides dynamic hints.",
+  "requestFramePermissions": []
+}

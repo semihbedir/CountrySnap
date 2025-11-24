@@ -1,0 +1,16 @@
+{
+  "name": "CountrySnap",
+  "short_name": "CountrySnap",
+  "description": "A geography guessing game powered by AI.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/921/921490.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
